@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>insta485</title>
+</head>
+
+<body>
+<!-- top -->
+<h2 style="text-align:left;"><a href = "/">Insta485</a>
+<span style="float:right;"><a href = "/explore/">explore</a> | <a href = "/u/{{logname}}/">{{logname}}</a></span></h2>
+
+{% for user in users %}
+{% if posts.owner == user.username %}
+<!-- firstpost -->
+<p><a href = "/u/{{posts.owner}}/"><img src="/uploads/{{user.filename}}" alt="postowner" style="width:40px;height:45px;"></a>
+{% endif %}
+{% endfor %}
+<a href = "/u/{{posts.owner}}/"><b>{{posts.owner}}</b></a>
+<a href = "/p/{{post}}/">{{posts.created}}</a></p>
+<img src="/uploads/{{posts.filename}}" alt = "Postpic">
+<p>{{numoflike}}
+  {% if numoflike == 1 %}
+  like
+  {% else %}
+  likes
+  {% endif %}
+</p>
+{% if whetherlike == 1 %}
+    <form action="/p/{{post}}/" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="postid" value="{{post}}"/>
+        <input type="submit" name="unlike" value="unlike"/>
+      </form>
+
+{% else %}
+<form action="/p/{{post}}/" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="postid" value="{{post}}"/>
+    <input type="submit" name="like" value="like"/>
+  </form>
+{% endif %}
+{% for comment in comments %}
+<p><a href = "/u/{{comment.owner}}/"><b>{{comment.owner}}</b></a> {{comment.text}}</p>
+{% if comment.owner == logname %}
+<form action="/p/{{post}}/" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="commentid" value="{{comment.commentid}}"/>
+    <input type="submit" name="uncomment" value="delete"/>
+  </form>
+{% endif %}
+{% endfor %}
+
+<form action="/p/{{post}}/" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="postid" value="{{post}}"/>
+  <input type="text" name="text"/>
+  <input type="submit" name="comment" value="comment"/>
+</form>
+
+{% if posts.owner == logname %}
+<form action="/p/{{post}}/" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="postid" value="{{post}}"/>
+    <input type="submit" name="delete" value="delete this post"/>
+  </form>
+<p></p>
+{% endif %}
+
+</body>
+</html>

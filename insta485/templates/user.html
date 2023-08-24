@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+<title>insta485</title>
+</head>
+<body>
+
+<h1><a href="/">insta485</a></h1>
+<p><a href="/explore/">explore</a><a href="/u/{{logname}}/"> | {{logname}}</a></p>
+<h2>{{username}}</h2>
+{% if username != logname %}
+        {% if whether == 1 %}
+            following
+            <form action="/u/{{username}}/" method="post" enctype="multipart/form-data">
+                <input type="submit" name="unfollow" value="unfollow"/>
+                <input type="hidden" name="username" value="{{username}}"/>
+              </form>
+        {% else %}
+            not following
+            <form action="/u/{{username}}/" method="post" enctype="multipart/form-data">
+                <input type="submit" name="follow" value="follow"/>
+                <input type="hidden" name="username" value="{{username}}"/>
+              </form>
+        {% endif %}
+    {% else %}
+    <p><a href="/accounts/edit/">Edit profile</a><p></p>        
+    <form action="/accounts/logout/" method="post" enctype="multipart/form-data">
+        <input type="submit" name="logout" value="Logout"/>
+      </form>
+    {% endif %}
+<p>
+    {{numofpost}} 
+    {% if numofpost == 1 %}
+    post
+    {% else %}
+    posts
+    {% endif %}
+    
+    {{followers}}<a href="/u/{{username}}/followers/">  
+    {% if followers == 1 %}
+    follower
+    {% else %}
+    followers 
+    {% endif %} </a>
+    
+    {{followings}} <a href="/u/{{username}}/following/"> 
+    {% if followings == 1 %}
+    following
+    {% else %}
+    followings 
+    {% endif %}</a></p>
+<p>{{users}}</p>
+
+{% if username == logname %}
+<form action="/u/{{username}}/" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" name="create_post" value="upload new post"/>
+  </form>  
+{% endif %}
+<p></p>
+{% for post in posts %}
+<a href = "/p/{{post.postid}}/"><img src="/uploads/{{post.filename}}" alt = " "></a>
+{% endfor %}
+
+
+</body>
+</html>

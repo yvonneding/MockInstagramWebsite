@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>insta485</title>
+</head>
+
+<body>
+<!-- top -->
+<h2 style="text-align:left;"><a href = "/">Insta485</a>
+<span style="float:right;"><a href = "/accounts/login/">login</a></span></h2>
+
+<form action="/accounts/create/" method="post" enctype="multipart/form-data">
+  <p>Photo  <input type="file" name="file"></p>
+  <p>Name <input type="text" name="fullname"/></p>
+  <p>Username <input type="text" name="username"/></p>
+  <p>Email   <input type="text" name="email"/></p>
+  <p>Password <input type="password" name="password"/></p>
+  <p><input type="submit" name="signup" value="sign up"/></p>
+</form>
+
+<p>Have an account? <a href = "/accounts/login/">Log in</a></p>
+
+</body>

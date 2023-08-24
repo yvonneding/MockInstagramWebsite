@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+<title>insta485</title>
+</head>
+<body>
+
+<h1><a href="/">insta485</a></h1>
+<p><a href="/explore/">explore</a><a href="/u/{{logname}}/"> | {{logname}} </a></p>
+<p> Followers </p>
+{% for follower in followers %}
+    <a href="/u/{{follower.username}}/"><img src="/uploads/{{follower.filename}}" alt = "{{follower.username}}" width = "50" height = "60"></a>
+    <p><a href="/u/{{follower.username}}/">{{follower.username}}</a></p>
+    {% if follower.username != logname%}
+        {% if follower.whether == true %}
+            <p>following</p>
+            <form action="/u/{{username}}/followers/" method="post" enctype="multipart/form-data">
+                <input type="submit" name="unfollow" value="unfollow"/>
+                <input type="hidden" name="username" value="{{follower.username}}"/>
+              </form>
+              <p></p>
+        {% else %}
+            <p>not following</p>
+            <form action="/u/{{username}}/followers/" method="post" enctype="multipart/form-data">
+                <input type="submit" name="follow" value="follow"/>
+                <input type="hidden" name="username" value="{{follower.username}}"/>
+              </form>
+            <p></p>
+        {% endif %}
+    {% endif %}
+{% endfor %}
+</body>
+</html>

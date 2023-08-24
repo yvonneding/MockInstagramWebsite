@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+<title>insta485</title>
+</head>
+<body>
+
+<h1><a href="/">insta485</a></h1>
+<p><a href="/explore/">explore</a><a href="/u/{{logname}}/"> | {{logname}} </a></p>
+<p> Discover People </p>
+{% for person in people %}
+    <img src="/uploads/{{person.filename}}" alt = "{{person.username}}" width = "50" height = "60">
+    <p><a href="/u/{{person.username}}/">{{person.username}}</a></p>
+    <form action="/explore/" method="post" enctype="multipart/form-data">
+        <input type="submit" name="follow" value="follow"/>
+        <input type="hidden" name="username" value="{{person.username}}"/>
+      </form>
+{% endfor %}
+</body>
+</html>
